@@ -22,16 +22,38 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 			},
 		},
 		Tx: &autocliv1.ServiceCommandDescriptor{
-			Service: checkersv1.Msg_ServiceDesc.ServiceName,
-			RpcCommandOptions: []*autocliv1.RpcCommandOptions{
-				{
-					RpcMethod: "CreateGame",
-					Use:       "create index black red",
-					Short:     "Creates a new checkers game at the index for the black and red players",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{
-						{ProtoField: "index"},
-						{ProtoField: "black"},
-						{ProtoField: "red"},
+			SubCommands: map[string]*autocliv1.ServiceCommandDescriptor{
+				"create": {
+					Service: checkersv1.Msg_ServiceDesc.ServiceName,
+					RpcCommandOptions: []*autocliv1.RpcCommandOptions{
+						{
+							RpcMethod: "CreateGame",
+							Use:       "create index black red",
+							Short:     "Creates a new checkers game at the index for the black and red players",
+							PositionalArgs: []*autocliv1.PositionalArgDescriptor{
+								{ProtoField: "index"},
+								{ProtoField: "black"},
+								{ProtoField: "red"},
+							},
+						},
+					},
+				},
+				"torram-create": {
+					Service: checkersv1.CheckersTorram_ServiceDesc.ServiceName,
+					RpcCommandOptions: []*autocliv1.RpcCommandOptions{
+						{
+							RpcMethod: "CheckersCreateGm",
+							Use:       "torram-create index black red startTime endTime description",
+							Short:     "Creates Torram way of checkers game at index for black, red, startTime, endTime, and description",
+							PositionalArgs: []*autocliv1.PositionalArgDescriptor{
+								{ProtoField: "index"},
+								{ProtoField: "black"},
+								{ProtoField: "red"},
+								{ProtoField: "startTime"},
+								{ProtoField: "endTime"},
+								{ProtoField: "description"},
+							},
+						},
 					},
 				},
 			},

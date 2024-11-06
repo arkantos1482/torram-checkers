@@ -1,0 +1,32 @@
+syntax = "proto3";
+package alice.checkers.v1;
+
+option go_package = "github.com/alice/checkers";
+
+import "cosmos/msg/v1/msg.proto";
+import "gogoproto/gogo.proto";
+import "cosmos_proto/cosmos.proto";
+
+// Msg defines the module Msg service.
+service CheckersTorram {
+  option (cosmos.msg.v1.service) = true;
+
+  rpc CheckersCreateGm(ReqCheckersTorram) returns (ResCheckersTorram);
+}
+
+// MsgCreateGame defines the Msg/CreateGame request type.
+message ReqCheckersTorram {
+  option (cosmos.msg.v1.signer) = "creator";
+
+  // creator is the message sender.
+  string creator = 1;
+  string index = 2 ;
+  string black = 3 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string red = 4 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string start_time = 5; // Start time of the game
+  string end_time = 6;   // End time of the game, if applicable
+  string description = 7;
+}
+
+// MsgCreateGameResponse defines the Msg/CreateGame response type.
+message ResCheckersTorram {}

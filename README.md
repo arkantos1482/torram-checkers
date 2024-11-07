@@ -1,26 +1,42 @@
-# Mini - A minimal Cosmos SDK chain
+# Checkers Game on Cosmos SDK
 
-This repository contains an example of a tiny, but working Cosmos SDK chain.
-It uses the least modules possible and is intended to be used as a starting point for building your own chain, without all the boilerplate that other tools generate. It is a simpler version of Cosmos SDK's [simapp](https://github.com/cosmos/cosmos-sdk/tree/main/simapp).
+This project implements a Checkers game on the Cosmos SDK, allowing players to create games, query their status, and export the game state. Users can create games with basic settings or use the *Torram* option for more detailed game creation.
 
-`Minid` uses the **latest** version of the [Cosmos-SDK](https://github.com/cosmos/cosmos-sdk).
+## Commands
 
-## How to use
+### Create a Checkers Game with Detailed Settings (Torram)
+Creates a Checkers game with additional parameters, including start and end times and a description, along with the black and red players.
 
-In addition to learn how to build a chain thanks to `minid`, you can as well directly run `minid`.
-
-### Installation
-
-Install and run `minid`:
-
-```sh
-git clone git@github.com:cosmosregistry/chain-minimal.git
-cd chain-minimal
-make install # install the minid binary
-make init # initialize the chain
-minid start # start the chain
+```bash
+minid tx checkers torram create-game [flags]
 ```
 
-## Useful links
+### Create a Basic Checkers Game
+Creates a Checkers game at a specified index for the black and red players.
 
-* [Cosmos-SDK Documentation](https://docs.cosmos.network/)
+```bash
+minid tx checkers normal create-game [flags]
+```
+Query Game by Index
+Retrieve the current state of a game at a given index.
+
+```bash
+minid query checkers get-game [index] [flags]
+```
+Export State to JSON
+Export the current state of the chain to a JSON file.
+
+```bash
+minid export [flags]
+```
+
+### Getting Started
+Install Dependencies: Make sure to have the Cosmos SDK installed and configured.
+Build the Project: Run make to build the project.
+Start a Local Node: Use minid start to start the local blockchain node.
+Run Commands: Use the commands listed above to create and query games.
+Development
+Feel free to explore and modify the code to enhance the Checkers game or add new features!
+
+### License
+This project is licensed under the MIT License.
